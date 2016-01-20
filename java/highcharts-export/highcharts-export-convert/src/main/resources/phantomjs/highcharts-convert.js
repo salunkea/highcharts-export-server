@@ -18,65 +18,65 @@
 	"use strict";
 
 	var config = {
-			/* define locations of mandatory javascript files.
-			 * Depending on purchased license change the HIGHCHARTS property to 
-			 * highcharts.js or highstock.js 
-			 */
+				/* define locations of mandatory javascript files.
+				 * Depending on purchased license change the HIGHCHARTS property to
+				 * highcharts.js or highstock.js
+				 */
 
-			files: {
-				highcharts: {
-					JQUERY: 'jquery.1.9.1.min.js',
-					HIGHCHARTS: 'highcharts.js',
-					HIGHCHARTS_MORE: 'highcharts-more.js',
-					HIGHCHARTS_DATA: 'data.js',
-					HIGHCHARTS_DRILLDOWN: 'drilldown.js',
-					HIGHCHARTS_FUNNEL: 'funnel.js',
-					HIGHCHARTS_HEATMAP: 'heatmap.js',
-					HIGHCHARTS_TREEMAP: 'treemap.js',
-					HIGHCHARTS_3D: 'highcharts-3d.js',
-					HIGHCHARTS_NODATA: 'no-data-to-display.js',
-					// Uncomment below if you have both Highcharts and Highmaps license
-					// HIGHCHARTS_MAP: 'map.js',
-					HIGHCHARTS_SOLID_GAUGE: 'solid-gauge.js',
-					BROKEN_AXIS: 'broken-axis.js'
+				files: {
+					highcharts: {
+						JQUERY: 'jquery.1.9.1.min.js',
+						HIGHCHARTS: 'highcharts.js',
+						HIGHCHARTS_MORE: 'highcharts-more.js',
+						HIGHCHARTS_DATA: 'data.js',
+						HIGHCHARTS_DRILLDOWN: 'drilldown.js',
+						HIGHCHARTS_FUNNEL: 'funnel.js',
+						HIGHCHARTS_HEATMAP: 'heatmap.js',
+						HIGHCHARTS_TREEMAP: 'treemap.js',
+						HIGHCHARTS_3D: 'highcharts-3d.js',
+						HIGHCHARTS_NODATA: 'no-data-to-display.js',
+						// Uncomment below if you have both Highcharts and Highmaps license
+						// HIGHCHARTS_MAP: 'map.js',
+						HIGHCHARTS_SOLID_GAUGE: 'solid-gauge.js',
+						BROKEN_AXIS: 'broken-axis.js'
+					},
+					highstock: {
+						JQUERY: 'jquery.1.9.1.min.js',
+						HIGHCHARTS: 'highstock.js',
+						HIGHCHARTS_MORE: 'highcharts-more.js',
+						HIGHCHARTS_DATA: 'data.js',
+						HIGHCHARTS_DRILLDOWN: 'drilldown.js',
+						HIGHCHARTS_FUNNEL: 'funnel.js',
+						HIGHCHARTS_HEATMAP: 'heatmap.js',
+						HIGHCHARTS_TREEMAP: 'treemap.js',
+						HIGHCHARTS_3D: 'highcharts-3d.js',
+						HIGHCHARTS_NODATA: 'no-data-to-display.js',
+						// Uncomment below if you have both Highstock and Highmaps license
+						// HIGHCHARTS_MAP: 'map.js',
+						HIGHCHARTS_SOLID_GAUGE: 'solid-gauge.js',
+						BROKEN_AXIS: 'broken-axis.js'
+					},
+					highmaps: {
+						JQUERY: 'jquery.1.9.1.min.js',
+						HIGHCHARTS: 'highmaps.js',
+						HIGHCHARTS_DATA: 'data.js',
+						HIGHCHARTS_DRILLDOWN: 'drilldown.js',
+						HIGHCHARTS_HEATMAP: 'heatmap.js',
+						HIGHCHARTS_NODATA: 'no-data-to-display.js'
+					}
 				},
-				highstock: {
-					JQUERY: 'jquery.1.9.1.min.js',
-					HIGHCHARTS: 'highstock.js',
-					HIGHCHARTS_MORE: 'highcharts-more.js',
-					HIGHCHARTS_DATA: 'data.js',
-					HIGHCHARTS_DRILLDOWN: 'drilldown.js',
-					HIGHCHARTS_FUNNEL: 'funnel.js',
-					HIGHCHARTS_HEATMAP: 'heatmap.js',
-					HIGHCHARTS_TREEMAP: 'treemap.js',
-					HIGHCHARTS_3D: 'highcharts-3d.js',
-					HIGHCHARTS_NODATA: 'no-data-to-display.js',
-					// Uncomment below if you have both Highstock and Highmaps license
-					// HIGHCHARTS_MAP: 'map.js',
-					HIGHCHARTS_SOLID_GAUGE: 'solid-gauge.js',
-					BROKEN_AXIS: 'broken-axis.js'
-				},
-				highmaps: {
-					JQUERY: 'jquery.1.9.1.min.js',
-					HIGHCHARTS: 'highmaps.js',
-					HIGHCHARTS_DATA: 'data.js',
-					HIGHCHARTS_DRILLDOWN: 'drilldown.js',
-					HIGHCHARTS_HEATMAP: 'heatmap.js',
-					HIGHCHARTS_NODATA: 'no-data-to-display.js'
-				}
+				TIMEOUT: 5000 /* 5 seconds timout for loading images */
 			},
-			TIMEOUT: 5000 /* 5 seconds timout for loading images */
-		},
-		mapCLArguments,
-		render,
-		startServer = false,
-		args,
-		pick,
-		SVG_DOCTYPE = '<?xml version=\"1.0" standalone=\"no\"?><!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">',
-		dpiCorrection = 1.4,
-		system = require('system'),
-		fs = require('fs'),
-		serverMode = false;
+			mapCLArguments,
+			render,
+			startServer = false,
+			args,
+			pick,
+			SVG_DOCTYPE = '<?xml version=\"1.0" standalone=\"no\"?><!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">',
+			dpiCorrection = 1.4,
+			system = require('system'),
+			fs = require('fs'),
+			serverMode = false;
 
 	pick = function () {
 		var args = arguments, i, arg, length = args.length;
@@ -90,8 +90,8 @@
 
 	mapCLArguments = function () {
 		var map = {},
-			i,
-			key;
+				i,
+				key;
 
 		if (system.args.length < 1) {
 			console.log('Commandline Usage: highcharts-convert.js -infile URL -outfile filename -scale 2.5 -width 300 -constr Chart -callback callback.js');
@@ -120,41 +120,41 @@
 	render = function (params, exitCallback) {
 
 		var page = require('webpage').create(),
-			messages = {},
-			scaleAndClipPage,
-			loadChart,
-			createChart,
-			input,
-			constr,
-			callback,
-			width,
-			output,
-			outType,
-			timer,
-			renderSVG,
-			convert,
-			exit,
-			interval,
-			counter,
-			imagesLoaded = false;
+				messages = {},
+				scaleAndClipPage,
+				loadChart,
+				createChart,
+				input,
+				constr,
+				callback,
+				width,
+				output,
+				outType,
+				timer,
+				renderSVG,
+				convert,
+				exit,
+				interval,
+				counter,
+				imagesLoaded = false;
 
 		messages.optionsParsed = 'Highcharts.options.parsed';
 		messages.callbackParsed = 'Highcharts.cb.parsed';
-		
+
 		window.optionsParsed = false;
 		window.callbackParsed = false;
-		
+
 		//security measures, for not allowing loading iframes
 		page.navigationLocked = true;
-		
+
 		page.onConsoleMessage = function (msg) {
 			console.log(msg);
-			
+
 			/*
 			 * Ugly hack, but only way to get messages out of the 'page.evaluate()'
 			 * sandbox. If any, please contribute with improvements on this!
 			 */
-			
+
 			/* to check options or callback are properly parsed */
 			if (msg === messages.optionsParsed) {
 				window.optionsParsed = true;
@@ -172,19 +172,19 @@
 		/* scale and clip the page */
 		scaleAndClipPage = function (svg) {
 			/*	param: svg: The scg configuration object
-			*/
+			 */
 
 			var zoom = 1,
-				pageWidth = pick(params.width, svg.width),
-				clipwidth,
-				clipheight;
+					pageWidth = pick(params.width, svg.width),
+					clipwidth,
+					clipheight;
 
 			if (parseInt(pageWidth, 10) == pageWidth) {
 				zoom = pageWidth / svg.width;
 			}
 
 			/* set this line when scale factor has a higher precedence
-			scale has precedence : page.zoomFactor = params.scale  ? zoom * params.scale : zoom;*/
+			 scale has precedence : page.zoomFactor = params.scale  ? zoom * params.scale : zoom;*/
 
 			/* params.width has a higher precedence over scaling, to not break backover compatibility */
 			page.zoomFactor = params.scale && params.width == undefined ? zoom * params.scale : zoom;
@@ -244,38 +244,38 @@
 				exit(base64);
 			}
 		};
-		
+
 		function decrementImgCounter() {
 			counter -= 1;
 			if (counter < 1) {
 				imagesLoaded = true;
 			}
 		}
-		
+
 		function loadImages(imgUrls) {
 			var i, img;
 			counter = imgUrls.length;
-			for (i = 0; i < imgUrls.length; i += 1) {                    
-				img = new Image();                    
+			for (i = 0; i < imgUrls.length; i += 1) {
+				img = new Image();
 				/* onload decrements the counter, also when error (perhaps 404), don't wait for this image to be loaded */
-				img.onload = img.onerror = decrementImgCounter;                    
-				/* force loading of images by setting the src attr.*/                    
+				img.onload = img.onerror = decrementImgCounter;
+				/* force loading of images by setting the src attr.*/
 				img.src = imgUrls[i];
 			}
 		}
-		
+
 		renderSVG = function (svg) {
 			var svgFile;
 			// From this point we have 'loaded' or 'created' a SVG
-			
+
 			// Do we have to load images?
 			if (svg.imgUrls.length > 0) {
 				loadImages(svg.imgUrls);
 			} else  {
-				 // no images present, no loading, no waiting
+				// no images present, no loading, no waiting
 				imagesLoaded = true;
 			}
-			
+
 			try {
 				if (outType.toLowerCase() === 'svg') {
 					// output svg
@@ -333,7 +333,7 @@
 			if (outputType === 'jpeg') {
 				document.body.style.backgroundColor = 'white';
 			}
-			
+
 			nodes = document.querySelectorAll('*[stroke-opacity]');
 
 			for (nodeIter = 0; nodeIter < nodes.length; nodeIter += 1) {
@@ -344,14 +344,14 @@
 			}
 
 			svgElem = document.getElementsByTagName('svg')[0];
-			
+
 			imgs = document.getElementsByTagName('image');
 			imgUrls = [];
-			
+
 			for (imgIndex = 0; imgIndex < imgs.length; imgIndex = imgIndex + 1) {
 				imgUrls.push(imgs[imgIndex].href.baseVal);
-			}           
-			
+			}
+
 			return {
 				html: document.body.innerHTML,
 				width: svgElem.getAttribute("width"),
@@ -414,7 +414,7 @@
 
 			// disable animations
 			Highcharts.SVGRenderer.prototype.Element.prototype.animate = Highcharts.SVGRenderer.prototype.Element.prototype.attr;
-			Highcharts.setOptions({ 
+			Highcharts.setOptions({
 				plotOptions: {
 					series: {
 						animation: false
@@ -463,12 +463,12 @@
 
 				}, options, dataOptions);
 			} else {
-				chart = new Highcharts[constr](options, cb);				
+				chart = new Highcharts[constr](options, cb);
 			}
 
 			/* remove stroke-opacity paths, used by mouse-trackers, they turn up as
-			*  as fully opaque in the PDF
-			*/
+			 *  as fully opaque in the PDF
+			 */
 			nodes = document.querySelectorAll('*[stroke-opacity]');
 
 			for (nodeIter = 0; nodeIter < nodes.length; nodeIter += 1) {
@@ -477,15 +477,15 @@
 				elem.removeAttribute('stroke-opacity');
 				elem.setAttribute('opacity', opacity);
 			}
-			
+
 			imgs = document.getElementsByTagName('image');
 			imgUrls = [];
-			
+
 			for (imgIndex = 0; imgIndex < imgs.length; imgIndex = imgIndex + 1) {
 				imgUrls.push(imgs[imgIndex].href.baseVal);
 			}
-			
-			return {				
+
+			return {
 				html: $('div.highcharts-container')[0].innerHTML,
 				width: chart.chartWidth,
 				height: chart.chartHeight,
@@ -515,15 +515,15 @@
 
 			page.open('about:blank', function (status) {
 				var svg,
-					globalOptions = params.globaloptions,
-					dataOptions = params.dataoptions,
-					customCode = 'function customCode(options) {\n' + params.customcode + '}\n',
-					jsFile,
-					jsFiles;
+						globalOptions = params.globaloptions,
+						dataOptions = params.dataoptions,
+						customCode = 'function customCode(options) {\n' + params.customcode + '}\n',
+						jsFile,
+						jsFiles;
 
 				/* Decide if we have to generate a svg first before rendering */
 				if (input.substring(0, 4).toLowerCase() === "<svg" || input.substring(0, 5).toLowerCase() === "<?xml"
-					|| input.substring(0, 9).toLowerCase() === "<!doctype") {
+						|| input.substring(0, 9).toLowerCase() === "<!doctype") {
 					//render page directly from svg file
 					svg = page.evaluate(loadChart, input, outType);
 					page.viewportSize = { width: svg.width, height: svg.height };
@@ -533,12 +533,12 @@
 					 * We have a js file, let's render serverside from Highcharts options and grab the svg from it
 					 */
 
-					 // load our javascript dependencies based on the constructor
-					 if (constr === 'Map') {
-						 jsFiles = config.files.highmaps;
-					 } else if (constr === 'StockChart')
+					// load our javascript dependencies based on the constructor
+					if (constr === 'Map') {
+						jsFiles = config.files.highmaps;
+					} else if (constr === 'StockChart')
 						jsFiles = config.files.highstock;
-					 else {
+					else {
 						jsFiles = config.files.highcharts;
 					}
 
@@ -569,33 +569,33 @@
 		var server = require('webserver').create();
 
 		server.listen(host + ':' + port,
-			function (request, response) {
-				var jsonStr = request.postRaw || request.post,
-					params,
-					msg;
-				try {
-					params = JSON.parse(jsonStr);
-					if (params.status) {
-						// for server health validation
-						response.statusCode = 200;
-						response.write('OK');
-						response.close();
-					} else {
-						render(params, function (result) {
+				function (request, response) {
+					var jsonStr = request.postRaw || request.post,
+							params,
+							msg;
+					try {
+						params = JSON.parse(jsonStr);
+						if (params.status) {
+							// for server health validation
 							response.statusCode = 200;
-							response.write(result);
+							response.write('OK');
 							response.close();
-						});
+						} else {
+							render(params, function (result) {
+								response.statusCode = 200;
+								response.write(result);
+								response.close();
+							});
+						}
+					} catch (e) {
+						msg = "Failed rendering: \n" + e;
+						response.statusCode = 500;
+						response.setHeader('Content-Type', 'text/plain');
+						response.setHeader('Content-Length', msg.length);
+						response.write(msg);
+						response.close();
 					}
-				} catch (e) {
-					msg = "Failed rendering: \n" + e;
-					response.statusCode = 500;
-					response.setHeader('Content-Type', 'text/plain');
-					response.setHeader('Content-Length', msg.length);
-					response.write(msg);
-					response.close();
-				}
-			}); // end server.listen
+				}); // end server.listen
 
 		// switch to serverMode
 		serverMode = true;

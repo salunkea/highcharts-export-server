@@ -59,7 +59,7 @@ public class ExportController extends HttpServlet {
 	}
 
 	@RequestMapping(method = {RequestMethod.POST, RequestMethod.GET})
-	public HttpEntity<byte[]> exporter(
+	public HttpEntity<String> exporter(
 		@RequestParam(value = "svg", required = false) String svg,
 		@RequestParam(value = "type", required = false) String type,
 		@RequestParam(value = "filename", required = false) String filename,
@@ -79,22 +79,6 @@ public class ExportController extends HttpServlet {
 		String randomFilename = null;
 		String jsonpCallback = "";
 		boolean isAndroid = request.getHeader("user-agent") != null && request.getHeader("user-agent").contains("Android");
-
-		if ("GET".equalsIgnoreCase(request.getMethod())) {
-
-			// Handle redirect downloads for Android devices, these come in without request parameters
-			String tempFile = (String) session.getAttribute("tempFile");
-			session.removeAttribute("tempFile");
-
-			if (tempFile != null && !tempFile.isEmpty()) {
-				logger.debug("filename stored in session, read and stream from filesystem");
-				String basename = FilenameUtils.getBaseName(tempFile);
-				String extension = FilenameUtils.getExtension(tempFile);
-
-				return getFile(basename, extension);
-
-			}
-		}
 
 		// check for visitors who don't know this domain is really only for the exporting service ;)
 		if (request.getParameterMap().isEmpty()) {
@@ -128,40 +112,41 @@ public class ExportController extends HttpServlet {
 		}
 
 		String output = convert(svg, mime, width, scale, options, constructor, callback, globalOptions, randomFilename);
-		ByteArrayOutputStream stream;
+//		ByteArrayOutputStream stream;
 
 		HttpHeaders headers = new HttpHeaders();
 
-		if (async) {
-			String link = TempDir.getDownloadLink(randomFilename);
-			stream = new ByteArrayOutputStream();
-			if (jsonp) {
-				StringBuilder sb = new StringBuilder(jsonpCallback);
-				sb.append("('");
-				sb.append(link);
-				sb.append("')");
-				stream.write(sb.toString().getBytes("utf-8"));
-				headers.add("Content-Type", "text/javascript; charset=utf-8");
-			} else {
-				stream.write(link.getBytes("utf-8"));
-				headers.add("Content-Type", "text/html; charset=UTF-8");
-			}
-		} else {
-			headers.add("Content-Type", mime.getType() + "; charset=utf-8");
-			if (randomFilename != null && randomFilename.equals(output)) {
-				stream = writeFileToStream(randomFilename);
-			} else {
-				boolean base64 = !mime.getExtension().equals("svg");
-				stream = outputToStream(output, base64);
-			}
-			filename = getFilename(filename);
-			headers.add("Content-Disposition",
-				   "attachment; filename=" + filename.replace(" ", "_") + "." + mime.name().toLowerCase());
-		}
+//		if (async) {
+//			String link = TempDir.getDownloadLink(randomFilename);
+//			stream = new ByteArrayOutputStream();
+//			if (jsonp) {
+//				StringBuilder sb = new StringBuilder(jsonpCallback);
+//				sb.append("('");
+//				sb.append(link);
+//				sb.append("')");
+//				stream.write(sb.toString().getBytes("utf-8"));
+//				headers.add("Content-Type", "text/javascript; charset=utf-8");
+//			} else {
+//				stream.write(link.getBytes("utf-8"));
+//				headers.add("Content-Type", "text/html; charset=UTF-8");
+//			}
+//		} else {
+//			headers.add("Content-Type", mime.getType() + "; charset=utf-8");
+//			if (randomFilename != null && randomFilename.equals(output)) {
+//				stream = writeFileToStream(randomFilename);
+//			} else {
+//				boolean base64 = !mime.getExtension().equals("svg");
+//				stream = outputToStream(output, base64);
+//			}
+//			filename = getFilename(filename);
+//			headers.add("Content-Disposition",
+//				   "attachment; filename=" + filename.replace(" ", "_") + "." + mime.name().toLowerCase());
+//		}
 
-		headers.setContentLength(stream.size());
+		headers.add("Content-Type", mime.getType() + "; charset=utf-8");
+		//headers.setContentLength(output.size());
 
-		return new HttpEntity<byte[]>(stream.toByteArray(), headers);
+		return new HttpEntity<String>(output, headers);
 	}
 
 	@RequestMapping(value = "/files/{name}.{ext}", method = RequestMethod.GET)
